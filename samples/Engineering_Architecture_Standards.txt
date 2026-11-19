@@ -1,0 +1,10 @@
+Engineering Architecture & Microservices Guidelines
+
+1. API Design & Versioning
+All backend services must expose RESTful APIs under '/api/v1' with semantic versioning. OpenAPI / Swagger documentation is mandatory. Asynchronous endpoints for long-running workflows must return HTTP 202 Accepted.
+
+2. Vector Database & RAG Infrastructure
+Vector search operations utilize Qdrant with Cosine distance metric and 768-dimensional float32 embeddings. Payloads must include organization_id, access_level, and allowed_roles to enforce multi-tenant isolation at the query filter level.
+
+3. Database Access & ORM
+Services utilize SQLAlchemy 2.0 async engine with connection pooling. Migrations are managed via Alembic. Direct raw SQL execution without parameterized queries is strictly prohibited to prevent SQL injection vulnerabilities.
